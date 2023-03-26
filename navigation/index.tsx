@@ -30,6 +30,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
+      {/* <OtherNavigator /> */}
     </NavigationContainer>
   );
 }
@@ -43,7 +44,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={DoctorRegister} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={LandingScreen} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Roo" component={DoctorLogin} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
+      <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -52,6 +56,21 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+// function OtherNavigator() {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Root" component={DoctorLogin} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
+      <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
+      <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} /> */}
+      {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group> */}
+//     </Stack.Navigator>
+//   );
+// }
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.

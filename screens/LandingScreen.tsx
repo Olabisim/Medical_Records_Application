@@ -6,22 +6,13 @@ import Svg, {Ellipse, Path} from 'react-native-svg'
 
 
 
-export const LandingScreen = () => {
+export const LandingScreen = ({navigation: {navigate}}:any) => {
 
         const [selectedIndex, setSelectedIndex] = useState(1)
 
         const handleUserRoute = () => {
-                switch(selectedIndex) {
-                        case 1:
-                                break;
-                        case 2:
-                                break;
-                        default:
-
-                }
-        }
-        if(selectedIndex === 1) {
-                
+                if (selectedIndex === 1) navigate('DoctorRegister')
+                else navigate('PatientRegister')
         }
 
         return (
@@ -65,7 +56,7 @@ export const LandingScreen = () => {
                                         </V>
                                 </TO>
                                 <V>
-                                        <B title="Next" color="navy" onPress={() => handleUserRoute} />
+                                        <B title="Next" color="navy" onPress={() => handleUserRoute()} />
                                 </V>
 
                         </V>
