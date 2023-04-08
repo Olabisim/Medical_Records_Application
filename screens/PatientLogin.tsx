@@ -9,7 +9,7 @@ import {TextInput as TextInputPaper, Button as ButtonPaper, ActivityIndicator as
 
 
 
-export const PatientLogin = () => {
+export const PatientLogin = ({navigation: {navigate}}: any) => {
 
         const [selectedIndex, setSelectedIndex] = useState(1)
 
@@ -139,6 +139,9 @@ export const PatientLogin = () => {
                                         </ButtonPaper>
                                 {/* </V> */}
 
+                        </V>
+                        <V>
+                                <T style={{marginTop: 40}}>Don't Have an Account, <T onPress={() => navigate('PatientRegister')}>Please Register </T> </T>
                         </V>
                 </V>
         )

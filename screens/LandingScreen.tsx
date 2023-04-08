@@ -11,8 +11,8 @@ export const LandingScreen = ({navigation: {navigate}}:any) => {
         const [selectedIndex, setSelectedIndex] = useState(1)
 
         const handleUserRoute = () => {
-                if (selectedIndex === 1) navigate('DoctorRegister')
-                else navigate('PatientRegister')
+                if (selectedIndex === 1) navigate('DoctorLogin')
+                else navigate('PatientLogin')
         }
 
         return (

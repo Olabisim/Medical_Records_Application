@@ -48,6 +48,8 @@ function RootNavigator() {
       {/* <Stack.Screen name="Roo" component={DoctorLogin} options={{ headerShown: false }} /> */}
       <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
       <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} />
+      <Stack.Screen name="DoctorLogin" component={DoctorLogin} options={{ headerShown: false }} />
+      <Stack.Screen name="PatientLogin" component={PatientLogin} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

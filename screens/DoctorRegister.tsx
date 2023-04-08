@@ -10,7 +10,7 @@ import {TextInput as TextInputPaper, Button as ButtonPaper, ActivityIndicator as
 
 
 
-export const DoctorRegister = () => {
+export const DoctorRegister = ({navigation: {navigate}}: any) => {
 
         const [selectedIndex, setSelectedIndex] = useState(1)
 
@@ -299,6 +299,8 @@ export const DoctorRegister = () => {
                                 {/* </V> */}
 
                         </V>
+                        
+                        <T style={{marginTop: 40}}>Own an Account, <T onPress={() => navigate('DoctorLogin')}>Please Login </T> </T>
                 </V>
                 </SV>
         )
