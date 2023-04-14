@@ -31,18 +31,19 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
                 
                 try { 
                 
-                        const res:any = await fetch('https://itchy-pea-coat-crab.cyclic.app/api/signin', options)
-                                        .then(res => res.json())
+                        navigate('BottomTabNavigator', {screen: 'TabOne'})
+                        // const res:any = await fetch('https://itchy-pea-coat-crab.cyclic.app/api/signin', options)
+                        //                 .then(res => res.json())
 
-                        if(res.status === 'failed') {
-                                setLoadingValue(false)
-                                setcontentValue(res.message)
-                        }
-                        else {
+                        // if(res.status === 'failed') {
+                        //         setLoadingValue(false)
+                        //         setcontentValue(res.message)
+                        // }
+                        // else {
 
-                        }
-                        console.log("res")
-                        console.log(res)
+                        // }
+                        // console.log("res")
+                        // console.log(res)
                         
                 }
                 catch(err) {

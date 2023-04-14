@@ -19,6 +19,7 @@ export type RootStackParamList = {
   PatientRegister?: NavigatorScreenParams<RootTabParamList> | undefined;
   DoctorLogin?: NavigatorScreenParams<RootTabParamList> | undefined;
   PatientLogin?: NavigatorScreenParams<RootTabParamList> | undefined;
+  BottomTabNavigator?: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
 };
@@ -29,8 +30,8 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  TabOne: any;
+  TabTwo: any;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

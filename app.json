@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "medical_records_fingerprint",
-    "slug": "medical_records_fingerprint",
+    "name": "medical records app",
+    "slug": "medical_records_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -25,10 +25,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.medical_records_app.myapp"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e2233453-8d9a-4a69-95f4-e4dedb378aa4"
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -50,26 +50,27 @@ function RootNavigator() {
       <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} />
       <Stack.Screen name="DoctorLogin" component={DoctorLogin} options={{ headerShown: false }} />
       <Stack.Screen name="PatientLogin" component={PatientLogin} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
+
 // function OtherNavigator() {
 //   return (
 //     <Stack.Navigator>
 //       <Stack.Screen name="Root" component={DoctorLogin} options={{ headerShown: false }} />
-      {/* <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
-      <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
-      <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} /> */}
-      {/* <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
+//       <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
+//       <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
+//       <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} />
+//       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+//       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+//       <Stack.Group screenOptions={{ presentation: 'modal' }}>
+//         <Stack.Screen name="Modal" component={ModalScreen} />
+//       </Stack.Group>
 //     </Stack.Navigator>
 //   );
 // }
@@ -93,8 +94,8 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Dashboard',
+          tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={32} color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -108,15 +109,15 @@ function BottomTabNavigator() {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
-          ),
+          )
         })}
       />
       <BottomTab.Screen
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'About',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="vector-arrange-above" size={32} color={color} />,
         }}
       />
     </BottomTab.Navigator>
