@@ -19,6 +19,7 @@ export type RootStackParamList = {
   PatientRegister?: NavigatorScreenParams<RootTabParamList> | undefined;
   DoctorLogin?: NavigatorScreenParams<RootTabParamList> | undefined;
   PatientLogin?: NavigatorScreenParams<RootTabParamList> | undefined;
+  PatientTestResult?: NavigatorScreenParams<RootTabParamList> | undefined;
   BottomTabNavigator?: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;

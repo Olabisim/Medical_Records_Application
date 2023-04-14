@@ -16,7 +16,7 @@ export default function TabOneScreen({ navigation: {navigate} }: RootTabScreenPr
       {/* <PatientDashboardSubComp /> */}
                 <V>
                         <V style={{display: 'flex',  flexDirection: 'row' }}>
-                                <TO onPress={() => navigate("PatientLogin")} style={{display: 'flex', justifyContent: 'center',backgroundColor: '#f2f2f2', height: 200, width: 150, padding: 10, borderRadius: 10, margin: 15, marginTop: 5, marginRight: 5}}>
+                                <TO onPress={() => navigate("PatientTestResult")} style={{display: 'flex', justifyContent: 'center',backgroundColor: '#f2f2f2', height: 200, width: 150, padding: 10, borderRadius: 10, margin: 15, marginTop: 5, marginRight: 5}}>
                                         <V style={{alignItems: 'center', paddingBottom: 10}}>
                                                 <Fontisto name="blood-test" size={36} color="#3A5F0B" />
                                         </V>

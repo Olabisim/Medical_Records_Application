@@ -19,15 +19,14 @@ export default function TabTwoScreen() {
                                 </V>
                                 
                                 <V style={{backgroundColor: "#f2f2f2", marginTop:20}}> 
-                                                <T style={{color: "#3A5F0B", paddingHorizontal: 10, paddingVertical: 15, fontWeight: '300', lineHeight: 33, fontSize: 18}}>
-                                                        Patient Automated is a software created to bridge the gap between patients and doctor with smooth and easy access 
-                                                        to their tests results and consequent prescribed drugs for some health conditions.
+                                        <T style={{color: "#3A5F0B", paddingHorizontal: 10, paddingVertical: 15, fontWeight: '300', lineHeight: 33, fontSize: 18}}>
+                                                Patient Automated is a software created to bridge the gap between patients and doctor with smooth and easy access 
+                                                to their tests results and consequent prescribed drugs for some health conditions.
 
-                                                        We aim keep track of health records and only doctors are allowed to make update any change as call for experience.
-                                                </T>
-                                        </V>
+                                                We aim keep track of health records and only doctors are allowed to make update any change as call for experience.
+                                        </T>
+                                </V>
                         </V>
-                        {/* <EditScreenInfo path="/screens/TabTwoScreen.tsx" /> */}
 
                         </V>
                 </View>
