@@ -21,9 +21,10 @@ import { PatientLogin } from '../screens/PatientLogin';
 import { PatientRegister } from '../screens/PatientRegister';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList,RootTabParamList2, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { PatientTestResult } from '../screens/PatientTestResult';
+import DoctorDashboard from '../screens/DoctorDashboard';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -53,6 +54,7 @@ function RootNavigator() {
       <Stack.Screen name="PatientLogin" component={PatientLogin} options={{ headerShown: false }} />
       <Stack.Screen name="PatientTestResult" component={PatientTestResult} options={{ headerShown: false }} />
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="BottomTabNavigator2" component={BottomTabNavigator2} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -95,7 +97,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
+        options={({ navigation }: any) => ({
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={32} color={color} />,
           headerRight: () => (
@@ -126,6 +128,61 @@ function BottomTabNavigator() {
   );
 }
 
+
+const BottomTab2 = createBottomTabNavigator<RootTabParamList2>();
+
+
+function BottomTabNavigator2() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <BottomTab2.Navigator
+      initialRouteName="DoctorDashboard"
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme].tint,
+      }}>
+      <BottomTab2.Screen
+        name="DoctorDashboard"
+        component={DoctorDashboard}
+        options={({ navigation }: any) => ({
+          title: 'Dashboard',
+          tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={32} color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Modal')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <FontAwesome
+                name="info-circle"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          )
+        })}
+      />
+      <BottomTab2.Screen
+        name="TabTwo"
+        component={TabTwoScreen}
+        options={{
+          title: 'Changes',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="vector-arrange-above" size={32} color={color} />,
+        }}
+      />
+
+      <BottomTab2.Screen
+        name="TabThree"
+        component={TabTwoScreen}
+        options={{
+          title: 'About',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="vector-arrange-above" size={32} color={color} />,
+        }}
+      />
+    </BottomTab2.Navigator>
+  );
+}
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
