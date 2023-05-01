@@ -1,10 +1,11 @@
 import { } from "../components/Themed"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { StyleProp, ViewStyle, StyleSheet as SS, View as V, Text as T, Button as B, TouchableOpacity as TO, TextInput, SafeAreaView} from "react-native";
-import { useState } from "react";
+import { StyleProp, ViewStyle, StyleSheet as SS, View as V, Text as T, Button as B, TouchableOpacity as TO, TextInput, SafeAreaView, Alert} from "react-native";
+import { useState, useEffect } from "react";
 import Svg, {Ellipse, Path} from 'react-native-svg'
 import {useForm, Controller} from 'react-hook-form'
 import {TextInput as TextInputPaper, Button as ButtonPaper, ActivityIndicator as AI} from 'react-native-paper'
+import * as LocalAuthentication from 'expo-local-authentication'
 // import Dialog, {SlideAnimation, DialogFooter, DialogButton, DialogContent} from "react-native-popup-dialog";
 
 
@@ -54,6 +55,103 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                         setLoadingValue(false)
                 }
         }
+
+        
+        // FINGERPRINT START
+        // **************************************
+        // **************************************
+        // **************************************
+
+        const [isBiometricSupported, setIsBiometricSupported] = useState(false)
+
+
+        // to check maybe ability to scan is availble
+        useEffect(() => {
+                (async () => {
+                        const compatible = await LocalAuthentication.hasHardwareAsync();
+                        setIsBiometricSupported(compatible)
+                })
+        }, [])
+
+        
+        const fallBackToDefaultAuth = () => {
+                console.log('fall back to password authentication');
+        }
+
+        const alertComponent = (title:any, mess:any, btnTxt:any, btnFunc:any) => {
+                return Alert.alert(title, mess, [
+                        {
+                                text: btnTxt,
+                                onPress: btnFunc,
+                        }        
+                ]);
+        }
+
+        const handleBiometricAuth = async () => {
+                // check if hardware supports biometric
+                const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync()
+
+
+                // fallback to default if biometrics not available
+                if(!isBiometricAvailable) {
+                        return alertComponent(
+                                'Please enter your password', 
+                                'Biometric Auth not Supported',
+                                'Ok',
+                                ( ) => fallBackToDefaultAuth()
+                        )
+                }
+                // check biometric types available (fingerpritn, facial recognition, iris recognition)
+                let supportedBiometrics;
+                if(isBiometricAvailable) supportedBiometrics = await LocalAuthentication.supportedBiometrics
+
+                // check biometrics are saved locally in users device
+
+                const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
+                if(!savedBiometrics) return alertComponent(
+                        'Biometric record not found',
+                        'Please Login with password',
+                        "Ok",
+                        () => fallBackToDefaultAuth()
+                );
+
+                // authenticate with biometric
+                const biometricAuth = await LocalAuthentication.authenticateAsync({
+                        promptMessage: "Login with Biometrics",
+                        cancelLabel: 'cancel',
+                        disableDeviceFallback: true,
+                });
+
+                // Log the user in on success
+                if (biometricAuth) {TwoButtonAlert()};
+
+                console.log({isBiometricAvailable})
+                console.log({supportedBiometrics})
+                console.log({savedBiometrics})
+                console.log({biometricAuth})
+
+        };
+
+
+        const TwoButtonAlert = () => {
+                Alert.alert('Welcome To App', 'Do something now', [
+                        {
+                        text: 'Back',
+                        onPress: () => console.log('cancel pressed'),
+                        style: 'cancel'
+                        },
+                        {
+                        text: 'OK',
+                        onPress: () => console.log('OK pressed')
+                        }
+                ]
+                )
+        }
+
+        // **************************************
+        // **************************************
+        // **************************************
+        // FINGERPRINT END
 
         console.log("checked the console")
 
@@ -142,7 +240,45 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                                 {/* </V> */}
 
                         </V>
-                                <T style={{marginTop: 40}}>Don't Have an Account, <T onPress={() => navigate('DoctorRegister')}>Please Register </T> </T>
+                        <T style={{marginTop: 40}}>Don't Have an Account, <T onPress={() => navigate('DoctorRegister')}>Please Register </T> </T>
+                        
+                        <V style={{backgroundColor: '#f2f2f2', padding: 15, margin:5, borderRadius: 10}}>
+                                <T
+                                style={{
+                                        // height: 40,
+                                        // marginTop: 40
+                                        textAlign: 'center',
+                                        paddingBottom: 10,
+                                        textTransform: 'capitalize'
+                                }}
+                                >
+                                        {
+                                                isBiometricSupported
+                                                ?
+                                                'Your Device is not Compatible with Biometrics'
+                                                :
+                                                "face or Fingerprint scanner is available on this device"
+                                        }
+                                </T>
+                                <TO
+                                        style={{
+                                                // height: 40,
+                                                marginTop: 10
+                                        }}
+                                >
+                                        <ButtonPaper
+                                                mode='outlined'
+                                                onPress={handleBiometricAuth}
+                                                style={{borderColor: "#3A5F0B"}}
+                                        > 
+                                        <T style={{color: '#3A5F0B', fontWeight: '400'}}>
+
+                                                Login with Biometrics
+                                        </T>
+                                        </ButtonPaper>
+                                </TO>
+
+                        </V>
                 </V>
         )
 }

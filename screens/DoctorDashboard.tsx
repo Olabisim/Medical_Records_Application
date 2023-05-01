@@ -12,10 +12,7 @@ export default function DoctorDashboard({ navigation: {navigate} }: any) {
         <SV>
                 
                 <View style={styles.container}>
-                <Text style={[styles.title, {paddingBottom: 20}]}>Welcome, Mr Andrew Arowolo</Text>
-                {/* <View style={styles.separator} lightColor="#3A5F0B" darkColor="#3A5F0B" /> */}
-                {/* <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
-                {/* <PatientDashboardSubComp /> */}
+                        <Text style={[styles.title, {paddingBottom: 20}]}>Welcome, Mr Andrew Arowolo</Text>
                                 <V>
                                         <V style={{display: 'flex',  flexDirection: 'row' }}>
                                                 <TO onPress={() => navigate("PatientTestResult")} style={{display: 'flex', justifyContent: 'center',backgroundColor: '#f2f2f2', height: 200, width: 150, padding: 10, borderRadius: 10, margin: 15, marginTop: 5, marginRight: 5}}>
