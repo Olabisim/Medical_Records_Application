@@ -134,7 +134,7 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
 
 
         const TwoButtonAlert = () => {
-                Alert.alert('Welcome To App', 'Do something now', [
+                Alert.alert('Fingerprint Verfied', 'Access Dashboard', [
                         {
                         text: 'Back',
                         onPress: () => console.log('cancel pressed'),
@@ -142,7 +142,7 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                         },
                         {
                         text: 'OK',
-                        onPress: () => console.log('OK pressed')
+                        onPress: () => navigate('BottomTabNavigator2', {screen: 'DoctorDashboard'})
                         }
                 ]
                 )
@@ -203,6 +203,7 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                                                                         value={value}
                                                                         onChangeText={onChange}
                                                                         style={{borderColor:"#3A5F0B", backgroundColor: "#fff", color: "#3A5F0B"}}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -218,6 +219,7 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                                                                         onChangeText={onChange}
                                                                         style={{borderColor:"#3A5F0B", backgroundColor: "#fff", color: "#3A5F0B"}}
                                                                         secureTextEntry
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -240,7 +242,10 @@ export const DoctorLogin = ({navigation: {navigate}}: any) => {
                                 {/* </V> */}
 
                         </V>
+                        {/*
+                        
                         <T style={{marginTop: 40}}>Don't Have an Account, <T onPress={() => navigate('DoctorRegister')}>Please Register </T> </T>
+                        */}
                         
                         <V style={{backgroundColor: '#f2f2f2', padding: 15, margin:5, borderRadius: 10}}>
                                 <T

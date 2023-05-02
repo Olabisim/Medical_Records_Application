@@ -25,6 +25,8 @@ import { RootStackParamList, RootTabParamList,RootTabParamList2, RootTabScreenPr
 import LinkingConfiguration from './LinkingConfiguration';
 import { PatientTestResult } from '../screens/PatientTestResult';
 import DoctorDashboard from '../screens/DoctorDashboard';
+import { AdminLogin } from '../screens/AdminLogin';
+import AdminDashboard from '../screens/AdminDashboard';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -48,6 +50,8 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={LandingScreen} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Roo" component={DoctorLogin} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="AdminLogin" component={AdminLogin} options={{ headerShown: false }} />
+      <Stack.Screen name="AdminDashboard" component={AdminDashboard} options={{ headerShown: false }} />
       <Stack.Screen name="DoctorRegister" component={DoctorRegister} options={{ headerShown: false }} />
       <Stack.Screen name="PatientRegister" component={PatientRegister} options={{ headerShown: false }} />
       <Stack.Screen name="DoctorLogin" component={DoctorLogin} options={{ headerShown: false }} />

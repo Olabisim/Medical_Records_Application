@@ -17,6 +17,9 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
         const [loadingValue, setLoadingValue] = useState(false)
         const [contentValue, setcontentValue] = useState(false)
 
+        const [errMess, seterrMess] = useState('')
+        const [errMessStatus, seterrMessStatus] = useState(false)
+
         // const [genderData, setgenderData] = useState({
         //         value: '',
         //         list: [
@@ -42,15 +45,18 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                 
                 try { 
                 
-                        const res:any = await fetch('https://itchy-pea-coat-crab.cyclic.app/api/signup', options)
+                        const res:any = await fetch('https://itchy-pea-coat-crab.cyclic.app/api/signup/patient', options)
                                         .then(res => res.json())
-
+                        console.log(res)
                         if(res.status === 'error') {
+                                seterrMessStatus(true)
+                                seterrMess(res.message)
                                 setLoadingValue(false)
                                 setcontentValue(res.message)
+                                
                         }
                         else {
-
+                                navigate('PatientLogin')
                         }
                         console.log("res")
                         console.log(res)
@@ -103,6 +109,14 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                         <T style={{fontSize: 26, marginBottom: 24, color: "#3A5F0B", fontWeight: '300' }}>PATIENT REGISTER</T> 
                                         <T style={{marginBottom: 22, fontSize: 16, fontWeight: '300', color: "#4d4d4d"}}>Smooth and easy patient automated system in health facilities</T>
                                 </V>  
+                                {
+                                        errMessStatus
+                                        &&
+                                        <V style={{backgroundColor: '#ffe6e6', paddingVertical: 5, borderRadius: 5}}>
+                                                <T style={{color: '#ff3333', textAlign: 'center'}}> {errMess}</T>
+                                        </V>
+                                }
+
 
                                 <V style={{marginBottom: 20}}>      
                                         <SafeAreaView>
@@ -117,6 +131,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Full Name"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -132,6 +147,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Email"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -147,6 +163,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Age"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -162,6 +179,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Gender"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                                 // <PaperSelect 
@@ -185,6 +203,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Marital Status"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -200,6 +219,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Allergies"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -215,6 +235,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Next Of Kin"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -230,6 +251,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Number"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -247,6 +269,7 @@ export const PatientRegister = ({navigation: {navigate}}: any) => {
                                                                         onChangeText={onChange}
                                                                         style={{marginTop: 10}}
                                                                         secureTextEntry
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}

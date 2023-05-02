@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
-export const PatientLogin = ({navigation: {navigate}}: any) => {
+export const AdminLogin = ({navigation: {navigate}}: any) => {
 
         const [selectedIndex, setSelectedIndex] = useState(1)
 
@@ -24,7 +24,7 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
 
         const storeData = async (value: string) => {
                 try {
-                        await AsyncStorage.setItem('@storage_key', value)
+                        await AsyncStorage.setItem('@admin_key', value)
                 }
                 catch(e) {
 
@@ -39,7 +39,7 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
                         headers: {
                                 'Content-Type': 'application/json', 'Accept': 'application/json'
                         },
-                        body: JSON.stringify({...formData, role: 'patient'})
+                        body: JSON.stringify({...formData, role: 'admin'})
                 }
                 
                 try { 
@@ -59,7 +59,7 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
                         else {
                                 // console.log(res.token)
                                 storeData(res.token)
-                                navigate('BottomTabNavigator', {screen: 'TabOne'})
+                                navigate('AdminDashboard')
                         }
                         console.log("res")
                         console.log(res)
@@ -75,102 +75,6 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
         }
 
         console.log("checked the console")
-
-        // FINGERPRINT START
-        // **************************************
-        // **************************************
-        // **************************************
-
-        const [isBiometricSupported, setIsBiometricSupported] = useState(false)
-
-
-        // to check maybe ability to scan is availble
-        useEffect(() => {
-                (async () => {
-                        const compatible = await LocalAuthentication.hasHardwareAsync();
-                        setIsBiometricSupported(compatible)
-                })
-        }, [])
-
-        
-        const fallBackToDefaultAuth = () => {
-                console.log('fall back to password authentication');
-        }
-
-        const alertComponent = (title:any, mess:any, btnTxt:any, btnFunc:any) => {
-                return Alert.alert(title, mess, [
-                        {
-                                text: btnTxt,
-                                onPress: btnFunc,
-                        }        
-                ]);
-        }
-
-        const handleBiometricAuth = async () => {
-                // check if hardware supports biometric
-                const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync()
-
-
-                // fallback to default if biometrics not available
-                if(!isBiometricAvailable) {
-                        return alertComponent(
-                                'Please enter your password', 
-                                'Biometric Auth not Supported',
-                                'Ok',
-                                ( ) => fallBackToDefaultAuth()
-                        )
-                }
-                // check biometric types available (fingerpritn, facial recognition, iris recognition)
-                let supportedBiometrics;
-                if(isBiometricAvailable) supportedBiometrics = await LocalAuthentication.supportedBiometrics
-
-                // check biometrics are saved locally in users device
-
-                const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
-                if(!savedBiometrics) return alertComponent(
-                        'Biometric record not found',
-                        'Please Login with password',
-                        "Ok",
-                        () => fallBackToDefaultAuth()
-                );
-
-                // authenticate with biometric
-                const biometricAuth = await LocalAuthentication.authenticateAsync({
-                        promptMessage: "Login with Biometrics",
-                        cancelLabel: 'cancel',
-                        disableDeviceFallback: true,
-                });
-
-                // Log the user in on success
-                if (biometricAuth) {TwoButtonAlert()};
-
-                console.log({isBiometricAvailable})
-                console.log({supportedBiometrics})
-                console.log({savedBiometrics})
-                console.log({biometricAuth})
-
-        };
-
-
-        const TwoButtonAlert = () => {
-                Alert.alert('Fingerprint Verfied', 'Access Dashboard', [
-                        {
-                        text: 'Back',
-                        onPress: () => console.log('cancel pressed'),
-                        style: 'cancel'
-                        },
-                        {
-                        text: 'OK',
-                        onPress: () => navigate('BottomTabNavigator', {screen: 'TabOne'})
-                        }
-                ]
-                )
-        }
-
-        // **************************************
-        // **************************************
-        // **************************************
-        // FINGERPRINT END
 
         console.log("errMess") 
         console.log(errMess) 
@@ -208,8 +112,8 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
                         </V>
                         <V style={styles.myStyle as StyleProp<ViewStyle>}>
                                 <V style={{marginBottom: 30}}>
-                                        <T style={{fontSize: 26, marginBottom: 24, color: "#3A5F0B", fontWeight: '300' }}>PATIENT LOGIN</T> 
-                                        <T style={{marginBottom: 22, fontSize: 16, fontWeight: '300', color: "#4d4d4d"}}>Smooth and easy patient automated system in health facilities</T>
+                                        <T style={{fontSize: 26, marginBottom: 24, color: "#3A5F0B", fontWeight: '300' }}>ADMIN LOGIN</T> 
+                                        <T style={{marginBottom: 22, fontSize: 16, fontWeight: '300', color: "#4d4d4d"}}>This is a restricted page, do well to exit if you are not authorized.</T>
                                 </V>  
                                 {
                                         errMessStatus
@@ -273,48 +177,6 @@ export const PatientLogin = ({navigation: {navigate}}: any) => {
                                 {/* </V> */}
 
                         </V>
-                        <V>
-                                <T style={{marginTop: 40}}>Don't Have an Account, <T onPress={() => navigate('PatientRegister')}>Please Register </T> </T>
-                        </V>
-
-                        <V style={{backgroundColor: '#f2f2f2', padding: 15, margin:5, borderRadius: 10}}>
-                                <T
-                                style={{
-                                        // height: 40,
-                                        // marginTop: 40
-                                        textAlign: 'center',
-                                        paddingBottom: 10,
-                                        textTransform: 'capitalize'
-                                }}
-                                >
-                                        {
-                                                isBiometricSupported
-                                                ?
-                                                'Your Device is not Compatible with Biometrics'
-                                                :
-                                                "face or Fingerprint scanner is available on this device"
-                                        }
-                                </T>
-                                <TO
-                                        style={{
-                                                // height: 40,
-                                                marginTop: 10
-                                        }}
-                                >
-                                        <ButtonPaper
-                                                mode='outlined'
-                                                onPress={handleBiometricAuth}
-                                                style={{borderColor: "#3A5F0B"}}
-                                        > 
-                                        <T style={{color: '#3A5F0B', fontWeight: '400'}}>
-
-                                                Login with Biometrics
-                                        </T>
-                                        </ButtonPaper>
-                                </TO>
-
-                        </V>
-                        
                         
                 </V>
         )

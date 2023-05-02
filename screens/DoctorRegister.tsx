@@ -16,6 +16,8 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
 
         const [loadingValue, setLoadingValue] = useState(false)
         const [contentValue, setcontentValue] = useState(false)
+        const [errMess, seterrMess] = useState('')
+        const [errMessStatus, seterrMessStatus] = useState(false)
 
         // const [genderData, setgenderData] = useState({
         //         value: '',
@@ -48,9 +50,12 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                         if(res.status === 'error') {
                                 setLoadingValue(false)
                                 setcontentValue(res.message)
+                                seterrMessStatus(true)
+                                seterrMess(res.message)
                         }
                         else if (res.status === 'success')  {
                                 setcontentValue(res.message)
+                                navigate('AdminDashboard')
                         }
                         console.log("res")
                         console.log(res)
@@ -104,6 +109,13 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                         <T style={{marginBottom: 22, fontSize: 16, fontWeight: '300', color: "#4d4d4d"}}>Smooth and easy patient automated system in health facilities</T>
                                 </V>  
 
+                                {
+                                        errMessStatus
+                                        &&
+                                        <V style={{backgroundColor: '#ffe6e6', paddingVertical: 5, borderRadius: 5}}>
+                                                <T style={{color: '#ff3333', textAlign: 'center'}}> {errMess}</T>
+                                        </V>
+                                }
                                 <V style={{marginBottom: 20}}>      
                                         <SafeAreaView>
                                                 <T>{contentValue}</T>
@@ -117,6 +129,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Full Name"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -132,6 +145,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Email"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -147,6 +161,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Age"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -162,6 +177,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Gender"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                                 // <PaperSelect 
@@ -185,6 +201,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Marital Status"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -200,6 +217,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Allergies"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -215,6 +233,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Next Of Kin"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -230,6 +249,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="Number"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -245,6 +265,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="qualification"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -260,6 +281,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         placeholder="specialization"
                                                                         value={value}
                                                                         onChangeText={onChange}
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}
@@ -277,6 +299,7 @@ export const DoctorRegister = ({navigation: {navigate}}: any) => {
                                                                         onChangeText={onChange}
                                                                         style={{marginTop: 10}}
                                                                         secureTextEntry
+                                                                        autoCapitalize="none"
                                                                         // right={<TextInputPaper.Icon name="eye" />}
                                                                 />
                                                         )}

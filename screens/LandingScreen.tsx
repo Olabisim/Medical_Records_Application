@@ -6,7 +6,7 @@ import Svg, {Ellipse, Path} from 'react-native-svg'
 
 
 
-export const LandingScreen = ({navigation: {navigate}}:any) => {
+export const LandingScreen = ({navigation: {navigate}, route}:any) => {
 
         const [selectedIndex, setSelectedIndex] = useState(1)
 
@@ -25,8 +25,23 @@ export const LandingScreen = ({navigation: {navigate}}:any) => {
                                 <Ellipse cx="374.5042" cy="629.89567" rx="247.5" ry="10" fill="#fff"/>
                         </Svg>
                         <V style={styles.myStyle as StyleProp<ViewStyle>}>
+                                {/* {
+                                        route
+                                        ?
+                                        (
+                                                route?.params.data
+                                                &&
+                                                <V style={{backgroundColor: '#ccffcc', paddingVertical: 5, borderRadius: 5}}>
+                                                        <T style={{color: '#006600', textAlign: 'center'}}> {route?.params.data}</T>
+                                                </V>
+                                        )
+                                        :
+                                        (
+                                                <V> </V>
+                                        )
+                                } */}
                                 <V style={{marginBottom: 30}}>
-                                        <T style={{fontSize: 32,fontWeight: '200', marginBottom: 24, color: "#3A5F0B" }}>CHOOSE USER</T> 
+                                        <T style={{fontSize: 32,fontWeight: '200', marginBottom: 24, color: "#3A5F0B" }}>CHOOSE USER <T style={{paddingLeft: 4}} onPress={() => navigate('AdminLogin')}>@</T> </T> 
                                         <T style={{marginBottom: 22, fontSize: 16, fontWeight: '300', color: "#4d4d4d"}}>Smooth and easy patient automated system in health facilities</T>
                                 </V>  
                                 <TO 
